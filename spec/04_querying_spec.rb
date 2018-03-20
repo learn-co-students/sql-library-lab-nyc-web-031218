@@ -1,9 +1,12 @@
+require "pry"
+
 describe 'querying' do
   before do
     @db = SQLite3::Database.new(':memory:')
     @sql_runner = SQLRunner.new(@db)
     @sql_runner.execute_schema_sql
     @sql_runner.execute_data
+    #binding.pry
   end
 
   it 'selects all of the books titles and years in the first series and orders them chronologically' do
