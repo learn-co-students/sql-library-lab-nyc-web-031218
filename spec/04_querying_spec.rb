@@ -1,3 +1,4 @@
+require 'pry'
 describe 'querying' do
   before do
     @db = SQLite3::Database.new(':memory:')
@@ -6,16 +7,20 @@ describe 'querying' do
     @sql_runner.execute_data
   end
 
+
   it 'selects all of the books titles and years in the first series and orders them chronologically' do
     expect(@db.execute(select_books_titles_and_years_in_first_series_order_by_year)).to eq([["Game of Thrones", 1996], ["A Clash of Kings", 1998], ["A Storm of Swords", 2000]])
   end
-
   it 'returns the name and motto of the character with the longest motto' do
     expect(@db.execute(select_name_and_motto_of_char_with_longest_motto)).to eq([["Tyrion Lannister", "A Lannister always pays his debts"]])
   end
 
   it 'determines the most prolific species of characters and return its value and count' do
+
     expect(@db.execute(select_value_and_count_of_most_prolific_species)).to eq([["human", 4]])
+
+
+
   end
 
   it "selects the authors names and their series' subgenres" do
